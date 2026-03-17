@@ -1286,22 +1286,43 @@
     };
 
     // ===== localStorage =====
+    // localStorageが使用可能かチェック
+    function isStorageAvailable() {
+      try {
+        const test = '__storage_test__';
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
     function loadFromStorage() {
+      if (!isStorageAvailable()) {
+        // Brave等でlocalStorageがブロックされている場合
+        state.subs     = [];
+        state.payments = [...PAYMENTS_INIT];
+        state._storageBlocked = true;
+        document.documentElement.setAttribute('data-theme', 'light');
+        return;
+      }
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
           const data = JSON.parse(raw);
-          state.subs = Array.isArray(data.subs) ? data.subs : [...SUBS_INIT];
+          state.subs     = Array.isArray(data.subs)     ? data.subs     : [];
           state.payments = Array.isArray(data.payments) ? data.payments : [...PAYMENTS_INIT];
           state.darkMode = data.darkMode ?? false;
           state.currency = data.currency ?? 'JPY';
-          state.usdRate = data.usdRate ?? 149;
+          state.usdRate  = data.usdRate  ?? 149;
         } else {
-          state.subs = [...SUBS_INIT];
+          // 初回起動：サンプルデータなしで空の状態から開始
+          state.subs     = [];
           state.payments = [...PAYMENTS_INIT];
         }
       } catch (e) {
-        state.subs = [...SUBS_INIT];
+        state.subs     = [];
         state.payments = [...PAYMENTS_INIT];
       }
       // テーマ適用
@@ -1309,16 +1330,20 @@
     }
 
     function saveToStorage() {
+      if (!isStorageAvailable()) {
+        showToast('⚠️ ブラウザの設定でデータ保存がブロックされています');
+        return;
+      }
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          subs: state.subs,
+          subs:     state.subs,
           payments: state.payments,
           darkMode: state.darkMode,
           currency: state.currency,
-          usdRate: state.usdRate,
+          usdRate:  state.usdRate,
         }));
       } catch (e) {
-        showToast('保存に失敗しました');
+        showToast('保存に失敗しました: ' + e.message);
       }
     }
 
@@ -1592,6 +1617,11 @@
 
       return `
         <div class="screen">
+          ${state._storageBlocked ? `
+          <div style="background:#FEF2F2;border:1px solid #FCA5A5;border-radius:12px;margin:12px 16px 0;padding:12px 14px;">
+            <div style="font-size:13px;font-weight:700;color:#DC2626;margin-bottom:4px;">⚠️ データ保存がブロックされています</div>
+            <div style="font-size:12px;color:#991B1B;">Braveの場合：設定 → プライバシー → Cookieとサイトデータ → このサイトへのCookieを許可してください。</div>
+          </div>` : ''}
           <div class="home-hero">
             <div class="hero-label">今月の合計支出</div>
             <div class="hero-amount">${fmt(total)}</div>
@@ -2279,8 +2309,8 @@
       handleAction(action, el);
     }, true);
 
-    // イベント処理（入力）
-    document.addEventListener('input', (e) => {
+    // イベント処理（input + change 両対応）
+    function handleFormEvent(e) {
       const el = e.target.closest('[data-action]');
       if (!el) return;
       const action = el.dataset.action;
@@ -2294,7 +2324,10 @@
       } else if (action === 'importFile') {
         if (el.files && el.files[0]) importJSON(el.files[0]);
       }
-    });
+    }
+    // inputはテキスト入力、changeはselectドロップダウン用
+    document.addEventListener('input',  handleFormEvent, true);
+    document.addEventListener('change', handleFormEvent, true);
 
     function handleAction(action, el) {
       switch (action) {
@@ -2402,9 +2435,9 @@
         case 'exportJSON': exportJSON(); break;
         case 'triggerImport': document.getElementById('importFile')?.click(); break;
         case 'resetData':
-          if (confirm('すべてのデータを初期状態に戻します。\n本当によろしいですか？（取り消せません）')) {
-            state.subs = [...SUBS_INIT]; state.payments = [...PAYMENTS_INIT];
-            saveToStorage(); render(); showToast('データをリセットしました');
+          if (confirm('すべてのデータを削除します。\n本当によろしいですか？（取り消せません）')) {
+            state.subs = []; state.payments = [...PAYMENTS_INIT];
+            saveToStorage(); render(); showToast('データを削除しました');
           }
           break;
 
