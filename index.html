@@ -1156,82 +1156,85 @@
     };
 
     // カタログデータ（70件超）
+    // カタログ通貨定数
+    const USD = 'USD'; const JPY = 'JPY';
+
     const CATALOG = [
       // 動画
-      { id: 1, name: 'Netflix', category: '動画', cycle: '月次', cancelUrl: 'https://www.netflix.com/cancelplan' },
-      { id: 2, name: 'Amazon Prime Video', category: '動画', cycle: '月次', cancelUrl: 'https://www.amazon.co.jp/mc' },
-      { id: 3, name: 'Disney+', category: '動画', cycle: '月次', cancelUrl: 'https://www.disneyplus.com' },
-      { id: 4, name: 'Hulu', category: '動画', cycle: '月次', cancelUrl: 'https://www.hulu.jp' },
-      { id: 5, name: 'U-NEXT', category: '動画', cycle: '月次', cancelUrl: 'https://video.unext.jp' },
-      { id: 6, name: 'ABEMA', category: '動画', cycle: '月次', cancelUrl: 'https://abema.tv' },
-      { id: 7, name: 'dTV', category: '動画', cycle: '月次', cancelUrl: 'https://video.dmkt-sp.jp' },
-      { id: 8, name: 'NHKオンデマンド', category: '動画', cycle: '月次', cancelUrl: 'https://www.nhk-ondemand.jp' },
-      { id: 9, name: 'FOD プレミアム', category: '動画', cycle: '月次', cancelUrl: 'https://fod.fujitv.co.jp' },
-      { id: 10, name: 'Lemino', category: '動画', cycle: '月次', cancelUrl: 'https://lemino.docomo.ne.jp' },
-      { id: 11, name: 'Apple TV+', category: '動画', cycle: '月次', cancelUrl: 'https://tv.apple.com' },
-      { id: 12, name: 'MAX（旧HBO Max）', category: '動画', cycle: '月次', cancelUrl: 'https://www.max.com' },
+      { id: 1, name: 'Netflix', category: '動画', cycle: '月次', amount: 1490, currency: JPY, cancelUrl: 'https://www.netflix.com/cancelplan' },
+      { id: 2, name: 'Amazon Prime Video', category: '動画', cycle: '月次', amount: 600, currency: JPY, cancelUrl: 'https://www.amazon.co.jp/mc' },
+      { id: 3, name: 'Disney+', category: '動画', cycle: '月次', amount: 990, currency: JPY, cancelUrl: 'https://www.disneyplus.com' },
+      { id: 4, name: 'Hulu', category: '動画', cycle: '月次', amount: 1026, currency: JPY, cancelUrl: 'https://www.hulu.jp' },
+      { id: 5, name: 'U-NEXT', category: '動画', cycle: '月次', amount: 2189, currency: JPY, cancelUrl: 'https://video.unext.jp' },
+      { id: 6, name: 'ABEMA', category: '動画', cycle: '月次', amount: 960, currency: JPY, cancelUrl: 'https://abema.tv' },
+      { id: 7, name: 'dTV', category: '動画', cycle: '月次', amount: 550, currency: JPY, cancelUrl: 'https://video.dmkt-sp.jp' },
+      { id: 8, name: 'NHKオンデマンド', category: '動画', cycle: '月次', amount: 990, currency: JPY, cancelUrl: 'https://www.nhk-ondemand.jp' },
+      { id: 9, name: 'FOD プレミアム', category: '動画', cycle: '月次', amount: 976, currency: JPY, cancelUrl: 'https://fod.fujitv.co.jp' },
+      { id: 10, name: 'Lemino', category: '動画', cycle: '月次', amount: 990, currency: JPY, cancelUrl: 'https://lemino.docomo.ne.jp' },
+      { id: 11, name: 'Apple TV+', category: '動画', cycle: '月次', amount: 900, currency: JPY, cancelUrl: 'https://tv.apple.com' },
+      { id: 12, name: 'MAX（旧HBO Max）', category: '動画', cycle: '月次', amount: 15, currency: USD, cancelUrl: 'https://www.max.com' },
       // 音楽
-      { id: 20, name: 'Spotify', category: '音楽', cycle: '月次', cancelUrl: 'https://www.spotify.com' },
-      { id: 21, name: 'Apple Music', category: '音楽', cycle: '月次', cancelUrl: 'https://music.apple.com' },
-      { id: 22, name: 'YouTube Music', category: '音楽', cycle: '月次', cancelUrl: 'https://music.youtube.com' },
-      { id: 23, name: 'LINE MUSIC', category: '音楽', cycle: '月次', cancelUrl: 'https://music.line.me' },
-      { id: 24, name: 'Amazon Music Unlimited', category: '音楽', cycle: '月次', cancelUrl: 'https://www.amazon.co.jp/music' },
-      { id: 25, name: 'AWA', category: '音楽', cycle: '月次', cancelUrl: 'https://awa.fm' },
-      { id: 26, name: 'mora qualitas', category: '音楽', cycle: '月次', cancelUrl: 'https://mora.jp' },
+      { id: 20, name: 'Spotify', category: '音楽', cycle: '月次', amount: 980, currency: JPY, cancelUrl: 'https://www.spotify.com' },
+      { id: 21, name: 'Apple Music', category: '音楽', cycle: '月次', amount: 1080, currency: JPY, cancelUrl: 'https://music.apple.com' },
+      { id: 22, name: 'YouTube Music', category: '音楽', cycle: '月次', amount: 980, currency: JPY, cancelUrl: 'https://music.youtube.com' },
+      { id: 23, name: 'LINE MUSIC', category: '音楽', cycle: '月次', amount: 980, currency: JPY, cancelUrl: 'https://music.line.me' },
+      { id: 24, name: 'Amazon Music Unlimited', category: '音楽', cycle: '月次', amount: 980, currency: JPY, cancelUrl: 'https://www.amazon.co.jp/music' },
+      { id: 25, name: 'AWA', category: '音楽', cycle: '月次', amount: 960, currency: 'JPY', cancelUrl: 'https://awa.fm' },
+      { id: 26, name: 'mora qualitas', category: '音楽', cycle: '月次', amount: 1078, currency: 'JPY', cancelUrl: 'https://mora.jp' },
       // ゲーム
-      { id: 30, name: 'PS Plus エッセンシャル', category: 'ゲーム', cycle: '年次', cancelUrl: 'https://www.playstation.com' },
-      { id: 31, name: 'PS Plus エクストラ', category: 'ゲーム', cycle: '年次', cancelUrl: 'https://www.playstation.com' },
-      { id: 32, name: 'Nintendo Switch Online', category: 'ゲーム', cycle: '年次', cancelUrl: 'https://accounts.nintendo.com' },
-      { id: 33, name: 'Xbox Game Pass', category: 'ゲーム', cycle: '月次', cancelUrl: 'https://www.xbox.com' },
-      { id: 34, name: 'Steam', category: 'ゲーム', cycle: '月次', cancelUrl: 'https://store.steampowered.com' },
-      { id: 35, name: 'Apple Arcade', category: 'ゲーム', cycle: '月次', cancelUrl: 'https://www.apple.com/apple-arcade' },
-      { id: 36, name: 'Google Play Pass', category: 'ゲーム', cycle: '月次', cancelUrl: 'https://play.google.com' },
+      { id: 30, name: 'PS Plus エッセンシャル', category: 'ゲーム', cycle: '年次', amount: 5143, currency: JPY, cancelUrl: 'https://www.playstation.com' },
+      { id: 31, name: 'PS Plus エクストラ', category: 'ゲーム', cycle: '年次', amount: 8600, currency: JPY, cancelUrl: 'https://www.playstation.com' },
+      { id: 32, name: 'Nintendo Switch Online', category: 'ゲーム', cycle: '年次', amount: 2400, currency: JPY, cancelUrl: 'https://accounts.nintendo.com' },
+      { id: 33, name: 'Xbox Game Pass', category: 'ゲーム', cycle: '月次', amount: 15, currency: USD, cancelUrl: 'https://www.xbox.com' },
+      { id: 34, name: 'Steam', category: 'ゲーム', cycle: '月次', amount: 0, currency: 'JPY', cancelUrl: 'https://store.steampowered.com' },
+      { id: 35, name: 'Apple Arcade', category: 'ゲーム', cycle: '月次', amount: 600, currency: JPY, cancelUrl: 'https://www.apple.com/apple-arcade' },
+      { id: 36, name: 'Google Play Pass', category: 'ゲーム', cycle: '月次', amount: 700, currency: 'JPY', cancelUrl: 'https://play.google.com' },
       // クラウド
-      { id: 40, name: 'Google One', category: 'クラウド', cycle: '月次', cancelUrl: 'https://one.google.com' },
-      { id: 41, name: 'iCloud+', category: 'クラウド', cycle: '月次', cancelUrl: 'https://appleid.apple.com' },
-      { id: 42, name: 'Dropbox', category: 'クラウド', cycle: '月次', cancelUrl: 'https://dropbox.com' },
-      { id: 43, name: 'OneDrive', category: 'クラウド', cycle: '月次', cancelUrl: 'https://onedrive.live.com' },
-      { id: 44, name: 'Amazon Drive', category: 'クラウド', cycle: '年次', cancelUrl: 'https://www.amazon.co.jp' },
-      { id: 45, name: 'Box', category: 'クラウド', cycle: '月次', cancelUrl: 'https://www.box.com' },
+      { id: 40, name: 'Google One', category: 'クラウド', cycle: '月次', amount: 250, currency: JPY, cancelUrl: 'https://one.google.com' },
+      { id: 41, name: 'iCloud+', category: 'クラウド', cycle: '月次', amount: 130, currency: JPY, cancelUrl: 'https://appleid.apple.com' },
+      { id: 42, name: 'Dropbox', category: 'クラウド', cycle: '月次', amount: 1200, currency: JPY, cancelUrl: 'https://dropbox.com' },
+      { id: 43, name: 'OneDrive', category: 'クラウド', cycle: '月次', amount: 224, currency: JPY, cancelUrl: 'https://onedrive.live.com' },
+      { id: 44, name: 'Amazon Drive', category: 'クラウド', cycle: '年次', amount: 2490, currency: 'JPY', cancelUrl: 'https://www.amazon.co.jp' },
+      { id: 45, name: 'Box', category: 'クラウド', cycle: '月次', amount: 15, currency: 'USD', cancelUrl: 'https://www.box.com' },
       // 仕事/学習
-      { id: 50, name: 'Claude Pro', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://claude.ai' },
-      { id: 51, name: 'ChatGPT Plus', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://chat.openai.com' },
-      { id: 52, name: 'Gemini Advanced', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://gemini.google.com' },
-      { id: 53, name: 'Perplexity Pro', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://www.perplexity.ai' },
-      { id: 54, name: 'Copilot Pro', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://copilot.microsoft.com' },
-      { id: 55, name: 'Adobe CC', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://account.adobe.com' },
-      { id: 56, name: 'Microsoft 365', category: '仕事/学習', cycle: '年次', cancelUrl: 'https://account.microsoft.com' },
-      { id: 57, name: 'Notion', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://notion.so' },
-      { id: 58, name: 'Slack', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://slack.com' },
-      { id: 59, name: 'Zoom', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://zoom.us' },
-      { id: 60, name: 'Canva Pro', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://www.canva.com' },
-      { id: 61, name: 'Figma', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://www.figma.com' },
-      { id: 62, name: 'GitHub Copilot', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://github.com' },
-      { id: 63, name: 'Duolingo Plus', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://www.duolingo.com' },
-      { id: 64, name: 'Udemy', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://www.udemy.com' },
-      { id: 65, name: 'LinkedIn Premium', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://www.linkedin.com' },
-      { id: 66, name: 'Evernote', category: '仕事/学習', cycle: '月次', cancelUrl: 'https://evernote.com' },
-      { id: 67, name: '1Password', category: '仕事/学習', cycle: '年次', cancelUrl: 'https://1password.com' },
-      { id: 68, name: 'LastPass', category: '仕事/学習', cycle: '年次', cancelUrl: 'https://www.lastpass.com' },
+      { id: 50, name: 'Claude Pro', category: '仕事/学習', cycle: '月次', amount: 20, currency: USD, cancelUrl: 'https://claude.ai' },
+      { id: 51, name: 'ChatGPT Plus', category: '仕事/学習', cycle: '月次', amount: 20, currency: USD, cancelUrl: 'https://chat.openai.com' },
+      { id: 52, name: 'Gemini Advanced', category: '仕事/学習', cycle: '月次', amount: 20, currency: USD, cancelUrl: 'https://gemini.google.com' },
+      { id: 53, name: 'Perplexity Pro', category: '仕事/学習', cycle: '月次', amount: 20, currency: USD, cancelUrl: 'https://www.perplexity.ai' },
+      { id: 54, name: 'Copilot Pro', category: '仕事/学習', cycle: '月次', amount: 20, currency: USD, cancelUrl: 'https://copilot.microsoft.com' },
+      { id: 55, name: 'Adobe CC', category: '仕事/学習', cycle: '月次', amount: 6480, currency: JPY, cancelUrl: 'https://account.adobe.com' },
+      { id: 56, name: 'Microsoft 365', category: '仕事/学習', cycle: '年次', amount: 14900, currency: JPY, cancelUrl: 'https://account.microsoft.com' },
+      { id: 57, name: 'Notion', category: '仕事/学習', cycle: '月次', amount: 16, currency: USD, cancelUrl: 'https://notion.so' },
+      { id: 58, name: 'Slack', category: '仕事/学習', cycle: '月次', amount: 8, currency: USD, cancelUrl: 'https://slack.com' },
+      { id: 59, name: 'Zoom', category: '仕事/学習', cycle: '月次', amount: 15, currency: USD, cancelUrl: 'https://zoom.us' },
+      { id: 60, name: 'Canva Pro', category: '仕事/学習', cycle: '月次', amount: 1500, currency: JPY, cancelUrl: 'https://www.canva.com' },
+      { id: 61, name: 'Figma', category: '仕事/学習', cycle: '月次', amount: 15, currency: 'USD', cancelUrl: 'https://www.figma.com' },
+      { id: 62, name: 'GitHub Copilot', category: '仕事/学習', cycle: '月次', amount: 10, currency: USD, cancelUrl: 'https://github.com' },
+      { id: 63, name: 'Duolingo Plus', category: '仕事/学習', cycle: '月次', amount: 1133, currency: 'JPY', cancelUrl: 'https://www.duolingo.com' },
+      { id: 64, name: 'Udemy', category: '仕事/学習', cycle: '月次', amount: 2400, currency: 'JPY', cancelUrl: 'https://www.udemy.com' },
+      { id: 65, name: 'LinkedIn Premium', category: '仕事/学習', cycle: '月次', amount: 40, currency: USD, cancelUrl: 'https://www.linkedin.com' },
+      { id: 66, name: 'Evernote', category: '仕事/学習', cycle: '月次', amount: 1100, currency: 'JPY', cancelUrl: 'https://evernote.com' },
+      { id: 67, name: '1Password', category: '仕事/学習', cycle: '年次', amount: 36, currency: 'USD', cancelUrl: 'https://1password.com' },
+      { id: 68, name: 'LastPass', category: '仕事/学習', cycle: '年次', amount: 36, currency: 'USD', cancelUrl: 'https://www.lastpass.com' },
       // 通信・インフラ
-      { id: 70, name: '楽天モバイル', category: '通信', cycle: '月次', cancelUrl: 'https://network.mobile.rakuten.co.jp' },
-      { id: 71, name: 'ドコモ', category: '通信', cycle: '月次', cancelUrl: 'https://www.docomo.ne.jp' },
-      { id: 72, name: 'SoftBank', category: '通信', cycle: '月次', cancelUrl: 'https://www.softbank.jp' },
-      { id: 73, name: 'au', category: '通信', cycle: '月次', cancelUrl: 'https://www.au.com' },
-      { id: 74, name: 'Y!mobile', category: '通信', cycle: '月次', cancelUrl: 'https://www.ymobile.jp' },
-      { id: 75, name: 'IIJmio', category: '通信', cycle: '月次', cancelUrl: 'https://www.iijmio.jp' },
+      { id: 70, name: '楽天モバイル', category: '通信', cycle: '月次', amount: 3278, currency: 'JPY', cancelUrl: 'https://network.mobile.rakuten.co.jp' },
+      { id: 71, name: 'ドコモ', category: '通信', cycle: '月次', amount: 4565, currency: 'JPY', cancelUrl: 'https://www.docomo.ne.jp' },
+      { id: 72, name: 'SoftBank', category: '通信', cycle: '月次', amount: 4565, currency: 'JPY', cancelUrl: 'https://www.softbank.jp' },
+      { id: 73, name: 'au', category: '通信', cycle: '月次', amount: 4565, currency: 'JPY', cancelUrl: 'https://www.au.com' },
+      { id: 74, name: 'Y!mobile', category: '通信', cycle: '月次', amount: 2178, currency: 'JPY', cancelUrl: 'https://www.ymobile.jp' },
+      { id: 75, name: 'IIJmio', category: '通信', cycle: '月次', amount: 990, currency: 'JPY', cancelUrl: 'https://www.iijmio.jp' },
       // ニュース・情報
-      { id: 80, name: '日経電子版', category: 'ニュース', cycle: '月次', cancelUrl: 'https://www.nikkei.com' },
-      { id: 81, name: '朝日新聞デジタル', category: 'ニュース', cycle: '月次', cancelUrl: 'https://www.asahi.com' },
-      { id: 82, name: '読売新聞オンライン', category: 'ニュース', cycle: '月次', cancelUrl: 'https://www.yomiuri.co.jp' },
-      { id: 83, name: 'NewsPicks', category: 'ニュース', cycle: '月次', cancelUrl: 'https://newspicks.com' },
-      { id: 84, name: '日経ビジネス', category: 'ニュース', cycle: '月次', cancelUrl: 'https://business.nikkei.com' },
+      { id: 80, name: '日経電子版', category: 'ニュース', cycle: '月次', amount: 4277, currency: JPY, cancelUrl: 'https://www.nikkei.com' },
+      { id: 81, name: '朝日新聞デジタル', category: 'ニュース', cycle: '月次', amount: 1980, currency: JPY, cancelUrl: 'https://www.asahi.com' },
+      { id: 82, name: '読売新聞オンライン', category: 'ニュース', cycle: '月次', amount: 1980, currency: 'JPY', cancelUrl: 'https://www.yomiuri.co.jp' },
+      { id: 83, name: 'NewsPicks', category: 'ニュース', cycle: '月次', amount: 1500, currency: JPY, cancelUrl: 'https://newspicks.com' },
+      { id: 84, name: '日経ビジネス', category: 'ニュース', cycle: '月次', amount: 2200, currency: 'JPY', cancelUrl: 'https://business.nikkei.com' },
       // フィットネス・健康
-      { id: 90, name: 'Apple Fitness+', category: 'フィットネス', cycle: '月次', cancelUrl: 'https://www.apple.com/apple-fitness-plus' },
-      { id: 91, name: 'Nike Training Club', category: 'フィットネス', cycle: '月次', cancelUrl: 'https://www.nike.com/ntc-app' },
-      { id: 92, name: 'Peloton', category: 'フィットネス', cycle: '月次', cancelUrl: 'https://www.onepeloton.com' },
-      { id: 93, name: 'Calm', category: 'フィットネス', cycle: '年次', cancelUrl: 'https://www.calm.com' },
-      { id: 94, name: 'DELISH KITCHEN', category: 'フィットネス', cycle: '月次', cancelUrl: 'https://delishkitchen.tv' },
+      { id: 90, name: 'Apple Fitness+', category: 'フィットネス', cycle: '月次', amount: 600, currency: 'JPY', cancelUrl: 'https://www.apple.com/apple-fitness-plus' },
+      { id: 91, name: 'Nike Training Club', category: 'フィットネス', cycle: '月次', amount: 0, currency: 'JPY', cancelUrl: 'https://www.nike.com/ntc-app' },
+      { id: 92, name: 'Peloton', category: 'フィットネス', cycle: '月次', amount: 13, currency: 'USD', cancelUrl: 'https://www.onepeloton.com' },
+      { id: 93, name: 'Calm', category: 'フィットネス', cycle: '年次', amount: 70, currency: 'USD', cancelUrl: 'https://www.calm.com' },
+      { id: 94, name: 'DELISH KITCHEN', category: 'フィットネス', cycle: '月次', amount: 480, currency: 'JPY', cancelUrl: 'https://delishkitchen.tv' },
     ];
 
     // 初期サブスクデータ（サンプル8件）
@@ -1351,12 +1354,13 @@
     // 月の日数を返す
     function daysInMonth(y, m) { return new Date(y, m + 1, 0).getDate(); }
 
-    // 月額換算
+    // 月額換算（常にJPYベース）
     function monthlyAmount(sub) {
-      if (sub.cycle === '年次') return Math.round(sub.amount / 12);
-      if (sub.cycle === '週次') return Math.round(sub.amount * 4.33);
-      if (sub.cycle === '隔週') return Math.round(sub.amount * 2.17);
-      return sub.amount;
+      const base = toJpy(sub);
+      if (sub.cycle === '年次') return Math.round(base / 12);
+      if (sub.cycle === '週次') return Math.round(base * 4.33);
+      if (sub.cycle === '隔週') return Math.round(base * 2.17);
+      return base;
     }
 
     // 全サブスクの月額合計
@@ -1365,12 +1369,27 @@
     }
 
     // 金額フォーマット（通貨対応）
-    function fmt(n) {
+    // n: 金額, subCurrency: サブスク登録時の通貨('JPY'|'USD')
+    function fmt(n, subCurrency) {
+      const cur = subCurrency || 'JPY';
+      if (cur === 'USD') {
+        // USDで登録されたものは$表示
+        return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      }
       if (state.currency === 'USD') {
+        // 表示通貨がUSDの場合は円→ドル換算
         const usd = Number(n) / state.usdRate;
         return '$' + usd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
       }
       return '¥' + Number(n).toLocaleString('ja-JP');
+    }
+
+    // サブスクの月額を円に統一して計算（USD登録は円換算）
+    function toJpy(sub) {
+      if ((sub.amountCurrency || 'JPY') === 'USD') {
+        return sub.amount * state.usdRate;
+      }
+      return sub.amount;
     }
 
     // 日付文字列 → Date
@@ -1686,7 +1705,7 @@
                     <div class="sub-meta">毎月${s.billingDay}日請求</div>
                   </div>
                   <div class="sub-amount-wrap">
-                    <div class="sub-amount">${fmt(s.amount)}</div>
+                    <div class="sub-amount">${fmt(s.amount, s.amountCurrency)}</div>
                     <div class="sub-cycle">${days === 0 ? '今日' : days + '日後'}</div>
                   </div>
                 </div>`).join('<div class="divider"></div>')}
@@ -1724,7 +1743,7 @@
             </div>
           </div>
           <div class="sub-amount-wrap">
-            <div class="sub-amount">${fmt(s.amount)}</div>
+            <div class="sub-amount">${fmt(s.amount, s.amountCurrency)}${(s.amountCurrency==='USD')?'<span style="font-size:9px;color:var(--text-muted);margin-left:2px;">USD</span>':''}</div>
             <div class="sub-cycle">${s.cycle}</div>
           </div>
         </div>`;
@@ -1924,7 +1943,7 @@
                   <div class="sub-icon" style="background:${c.bg};width:36px;height:36px;font-size:16px;">${c.icon}</div>
                   <div style="flex:1;">
                     <div style="font-size:14px;font-weight:600;">${s.name}</div>
-                    ${s.cycle === '年次' ? `<div style="font-size:11px;color:var(--text-sub);">年額${fmt(s.amount)}（月換算）</div>` : ''}
+                    ${s.cycle === '年次' ? `<div style="font-size:11px;color:var(--text-sub);">年額${fmt(s.amount, s.amountCurrency)}（月換算）</div>` : ''}
                   </div>
                   <div style="text-align:right;">
                     <div style="font-size:14px;font-weight:700;">${fmt(ma)}</div>
@@ -2106,7 +2125,7 @@
             </div>
             <div class="card" style="text-align:center;margin-bottom:16px;background:var(--primary-light);border-color:transparent;">
               <div style="font-size:13px;color:var(--primary);font-weight:600;margin-bottom:4px;">${s.cycle}料金</div>
-              <div style="font-size:34px;font-weight:800;color:var(--primary);">${fmt(s.amount)}</div>
+              <div style="font-size:34px;font-weight:800;color:var(--primary);">${fmt(s.amount, s.amountCurrency)}</div>
               ${s.cycle === '年次' ? `<div style="font-size:12px;color:var(--text-sub);margin-top:2px;">月換算 ${fmt(Math.round(s.amount / 12))}</div>` : ''}
             </div>
             <div class="card" style="margin-bottom:16px;">
@@ -2170,11 +2189,18 @@
           <label class="form-label">サービス名 *</label>
           <input class="form-input" type="text" value="${name}" data-action="addForm" data-field="name" placeholder="Netflix">
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div class="form-group">
-            <label class="form-label">金額（円）*</label>
-            <input class="form-input" type="number" value="${amount}" data-action="addForm" data-field="amount" placeholder="1490">
+        <div class="form-group">
+          <label class="form-label">金額 *</label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div class="currency-toggle" style="flex-shrink:0;">
+              <button class="currency-btn ${get('amountCurrency','JPY')==='JPY'?'active':''}" data-action="addForm" data-field="amountCurrency" value="JPY">¥</button>
+              <button class="currency-btn ${get('amountCurrency','JPY')==='USD'?'active':''}" data-action="addForm" data-field="amountCurrency" value="USD">$</button>
+            </div>
+            <input class="form-input" type="number" value="${amount}" data-action="addForm" data-field="amount" placeholder="${get('amountCurrency','JPY')==='USD'?'20':'1490'}" style="flex:1;">
           </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group" style="display:none;"><label></label></div>
           <div class="form-group">
             <label class="form-label">請求周期</label>
             <div class="form-select-wrap">
@@ -2241,8 +2267,14 @@
             <div style="font-size:13px;color:var(--text-sub);">${item.category} · ${item.cycle}</div>
           </div>
           <div class="form-group">
-            <label class="form-label">金額（円）*</label>
-            <input class="form-input" type="number" value="${f.amount || ''}" data-action="addForm" data-field="amount" placeholder="1490">
+            <label class="form-label">金額 *</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div class="currency-toggle" style="flex-shrink:0;">
+                <button class="currency-btn ${(f.amountCurrency||item.currency||'JPY')==='JPY'?'active':''}" data-action="addForm" data-field="amountCurrency" value="JPY">¥</button>
+                <button class="currency-btn ${(f.amountCurrency||item.currency||'JPY')==='USD'?'active':''}" data-action="addForm" data-field="amountCurrency" value="USD">$</button>
+              </div>
+              <input class="form-input" type="number" value="${f.amount !== undefined ? f.amount : (item.amount || '')}" data-action="addForm" data-field="amount" placeholder="${(f.amountCurrency||item.currency||'JPY')==='USD'?'20':'1490'}" style="flex:1;">
+            </div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <div class="form-group">
@@ -2301,8 +2333,13 @@
       const action = el.dataset.action;
 
       // closeAdd/closeDetail はオーバーレイ直接クリック時のみ発火させるためのガード
-      // ※elがオーバーレイそのもので、かつe.targetもオーバーレイである場合のみ通す
       if ((action === 'closeAdd' || action === 'closeDetail') && e.target !== el) {
+        return;
+      }
+
+      // addForm/editPayFormのボタン（通貨切替等）はフォームイベントとして処理
+      if (action === 'addForm' || action === 'editPayForm') {
+        handleFormEvent(e);
         return;
       }
 
@@ -2316,8 +2353,11 @@
       const action = el.dataset.action;
       if (action === 'addForm') {
         state.addForm[el.dataset.field] = el.value;
+        // 通貨切替・selectは即再描画
+        if (el.tagName === 'BUTTON' || el.tagName === 'SELECT') render();
       } else if (action === 'editPayForm') {
         state.editPaymentForm[el.dataset.field] = el.value;
+        if (el.tagName === 'SELECT') render();
       } else if (action === 'listSearch') {
         state.listSearch = el.value;
         render();
@@ -2392,6 +2432,8 @@
               ...state.addForm,
               name: item.name, category: item.category,
               cycle: item.cycle, cancelUrl: item.cancelUrl || '',
+              amount: item.amount || '',
+              amountCurrency: item.currency || 'JPY',
             };
           }
           render(); break;
@@ -2486,6 +2528,7 @@
 
       const name = f.name || base.name || '';
       const amount = Number(f.amount || base.amount || 0);
+      const amountCurrency = f.amountCurrency || base.currency || 'JPY';
       const cycle = f.cycle || base.cycle || '月次';
       const category = f.category || base.category || '動画';
       const billingDay = Number(f.billingDay || 1);
@@ -2502,7 +2545,7 @@
       const tags = f.tags ? (Array.isArray(f.tags) ? f.tags : f.tags.split(',').map(t => t.trim()).filter(t => t)) : (base.tags || []);
       const notes = f.notes || base.notes || '';
 
-      const data = { name, amount, cycle, category, billingDay, paymentId, registrationDate, limitDate, cancelUrl, tags, notes };
+      const data = { name, amount, amountCurrency, cycle, category, billingDay, paymentId, registrationDate, limitDate, cancelUrl, tags, notes };
 
       if (isEdit) {
         state.subs = state.subs.map(s => s.id === state.editSubId ? { ...s, ...data } : s);
