@@ -1063,6 +1063,14 @@
       text-align: right;
     }
 
+    /* 棒グラフ色 */
+    .bar-current {
+      background: var(--primary);
+    }
+    .bar-past {
+      background: var(--surface-3);
+    }
+
     /* 区切り線 */
     .divider {
       height: 1px;
@@ -1120,6 +1128,55 @@
 
     .search-bar input::placeholder {
       color: var(--text-muted);
+    }
+
+    /* 家族共有モーダル */
+    .family-modal {
+      background: var(--surface);
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 480px;
+      max-height: 92dvh;
+      overflow-y: auto;
+      padding: 24px 20px 40px;
+    }
+
+    .family-sheet-header {
+      background: linear-gradient(135deg, #7C3AED 0%, #2563EB 100%);
+      border-radius: var(--radius);
+      padding: 16px;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .family-sub-row {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .secure-field {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .secure-value {
+      flex: 1;
+      font-size: 14px;
+      font-family: monospace;
+      letter-spacing: 0.05em;
+    }
+
+    .secure-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      color: var(--text-sub);
     }
 
     /* I/Oボタン行 */
@@ -1239,14 +1296,14 @@
 
     // 初期サブスクデータ（サンプル8件）
     const SUBS_INIT = [
-      { id: 1, name: 'Netflix', amount: 1490, cycle: '月次', category: '動画', billingDay: 24, paymentId: 1, registrationDate: '2025-01-20', limitDate: '2026-03-20', notes: 'プレミアムプラン、家族共有', tags: ['家族', '高画質'] },
-      { id: 2, name: 'Spotify', amount: 980, cycle: '月次', category: '音楽', billingDay: 27, paymentId: 1, registrationDate: '2024-11-15', limitDate: '2026-03-25', notes: '学割適用中', tags: ['自分用'] },
-      { id: 3, name: 'Adobe CC', amount: 6480, cycle: '月次', category: '仕事/学習', billingDay: 1, paymentId: 2, registrationDate: '2025-02-01', limitDate: '2026-03-28', notes: '本業で使用', tags: ['仕事'] },
-      { id: 4, name: 'Google One', amount: 250, cycle: '月次', category: 'クラウド', billingDay: 5, paymentId: 1, registrationDate: '2023-08-10', limitDate: '2026-03-04', notes: '写真バックアップ用', tags: ['必須'] },
-      { id: 5, name: 'Disney+', amount: 990, cycle: '月次', category: '動画', billingDay: 10, paymentId: 2, registrationDate: '2024-12-25', limitDate: '2026-03-09', notes: 'スターウォーズ専用', tags: ['家族'] },
-      { id: 6, name: 'ChatGPT Plus', amount: 3000, cycle: '月次', category: '仕事/学習', billingDay: 15, paymentId: 2, registrationDate: '2025-01-15', limitDate: '2026-03-14', notes: '仕事効率化', tags: ['AI', '仕事'] },
-      { id: 7, name: 'YouTube Music', amount: 980, cycle: '月次', category: '音楽', billingDay: 20, paymentId: 3, registrationDate: '2024-05-30', limitDate: '2026-03-19', notes: '広告なし最高', tags: ['音楽'] },
-      { id: 8, name: 'PS Plus', amount: 850, cycle: '年次', category: 'ゲーム', billingDay: 1, paymentId: 1, registrationDate: '2024-03-01', limitDate: '2026-03-28', notes: 'オンラインプレイ用', tags: ['ゲーム'] },
+      { id: 1, name: 'Netflix', amount: 1490, cycle: '月次', category: '動画', billingDay: 24, paymentId: 1, registrationDate: '2025-01-20', limitDate: '2026-03-20', notes: 'プレミアムプラン、家族共有', tags: ['家族', '高画質'], loginId: 'sample@email.com', cancelSteps: '1. netflix.com にログイン\n2. 右上アイコン → アカウント\n3. 「メンバーシップをキャンセル」をクリック' },
+      { id: 2, name: 'Spotify', amount: 980, cycle: '月次', category: '音楽', billingDay: 27, paymentId: 1, registrationDate: '2024-11-15', limitDate: '2026-03-25', notes: '学割適用中', tags: ['自分用'], loginId: 'sample@email.com', cancelSteps: '' },
+      { id: 3, name: 'Adobe CC', amount: 6480, cycle: '月次', category: '仕事/学習', billingDay: 1, paymentId: 2, registrationDate: '2025-02-01', limitDate: '2026-03-28', notes: '本業で使用', tags: ['仕事'], loginId: 'work@email.com', cancelSteps: '1. account.adobe.com にログイン\n2. プランとお支払い → プランを管理\n3. プランをキャンセル' },
+      { id: 4, name: 'Google One', amount: 250, cycle: '月次', category: 'クラウド', billingDay: 5, paymentId: 1, registrationDate: '2023-08-10', limitDate: '2026-03-04', notes: '写真バックアップ用', tags: ['必須'], loginId: 'sample@gmail.com', cancelSteps: '' },
+      { id: 5, name: 'Disney+', amount: 990, cycle: '月次', category: '動画', billingDay: 10, paymentId: 2, registrationDate: '2024-12-25', limitDate: '2026-03-09', notes: 'スターウォーズ専用', tags: ['家族'], loginId: '', cancelSteps: '' },
+      { id: 6, name: 'ChatGPT Plus', amount: 3000, cycle: '月次', category: '仕事/学習', billingDay: 15, paymentId: 2, registrationDate: '2025-01-15', limitDate: '2026-03-14', notes: '仕事効率化', tags: ['AI', '仕事'], loginId: 'work@email.com', cancelSteps: '1. chat.openai.com にログイン\n2. 左下メニュー → My plan\n3. Manage my subscription → Cancel plan' },
+      { id: 7, name: 'YouTube Music', amount: 980, cycle: '月次', category: '音楽', billingDay: 20, paymentId: 3, registrationDate: '2024-05-30', limitDate: '2026-03-19', notes: '広告なし最高', tags: ['音楽'], loginId: 'sample@gmail.com', cancelSteps: '' },
+      { id: 8, name: 'PS Plus', amount: 850, cycle: '年次', category: 'ゲーム', billingDay: 1, paymentId: 1, registrationDate: '2024-03-01', limitDate: '2026-03-28', notes: 'オンラインプレイ用', tags: ['ゲーム'], loginId: '', cancelSteps: '' },
     ];
 
     // 初期支払い方法データ
@@ -1286,6 +1343,12 @@
       darkMode: false,
       currency: 'JPY',   // JPY | USD
       usdRate: 149,
+      // 家族共有
+      showFamilyModal: false,
+      showFamilyContacts: false,
+      familyContacts: [],  // [{name, relation, email, phone, note}]
+      editFamilyIdx: null,
+      editFamilyForm: {},
     };
 
     // ===== localStorage =====
@@ -1319,6 +1382,7 @@
           state.darkMode = data.darkMode ?? false;
           state.currency = data.currency ?? 'JPY';
           state.usdRate  = data.usdRate  ?? 149;
+          state.familyContacts = Array.isArray(data.familyContacts) ? data.familyContacts : [];
         } else {
           // 初回起動：サンプルデータなしで空の状態から開始
           state.subs     = [];
@@ -1344,6 +1408,7 @@
           darkMode: state.darkMode,
           currency: state.currency,
           usdRate:  state.usdRate,
+          familyContacts: state.familyContacts,
         }));
       } catch (e) {
         showToast('保存に失敗しました: ' + e.message);
@@ -1527,6 +1592,7 @@
 
       if (state.screen === 'detail') html += renderDetailModal();
       if (state.screen === 'add') html += renderAddModal();
+      if (state.showFamilyModal) html += renderFamilyModal();
 
       app.innerHTML = html;
     }
@@ -1661,7 +1727,7 @@
           <div class="alert-banner danger">
             <div class="alert-banner-header" data-action="toggleAlert" data-key="alertDanger">
               🚨 緊急：解約期限が迫っています
-              <span class="alert-badge">${dangerWarnings.length}</span>
+              <span class="alert-banner-badge">${dangerWarnings.length}</span>
             </div>
             <div class="alert-banner-body" id="alertDanger">
               ${dangerWarnings.map(s => {
@@ -1679,7 +1745,7 @@
           <div class="alert-banner warning" style="margin-top:8px;">
             <div class="alert-banner-header">
               ⚠️ 解約期限アラート（7日以内）
-              <span class="alert-badge">${normalWarnings.length}</span>
+              <span class="alert-banner-badge">${normalWarnings.length}</span>
             </div>
             <div class="alert-banner-body">
               ${normalWarnings.map(s => {
@@ -1958,8 +2024,28 @@
 
     // ===== 設定画面 =====
     function renderSettings() {
+      const contactCount = state.familyContacts.length;
       return `
         <div class="screen">
+          <div class="section">
+            <div class="section-title">👨‍👩‍👧 家族への引き継ぎ</div>
+            <div class="card" style="border-color:rgba(124,58,237,0.3);background:linear-gradient(135deg,rgba(124,58,237,0.05) 0%,rgba(37,99,235,0.05) 100%);">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                <div style="width:44px;height:44px;border-radius:var(--radius-sm);background:linear-gradient(135deg,#7C3AED,#2563EB);display:flex;align-items:center;justify-content:center;font-size:22px;">👨‍👩‍👧</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;">もしもの時のための引き継ぎシート</div>
+                  <div style="font-size:12px;color:var(--text-sub);margin-top:2px;">緊急連絡先を登録し、サブスク情報を家族に共有</div>
+                </div>
+              </div>
+              <div style="font-size:13px;color:var(--text-sub);margin-bottom:14px;line-height:1.6;">
+                登録済みサブスク（${state.subs.length}件）の一覧・解約手順・ログインIDをまとめた引き継ぎシートを作成できます。
+              </div>
+              <div style="display:flex;gap:10px;">
+                <button class="btn btn-outline" style="flex:1;" data-action="openFamilyContacts">👤 連絡先を管理（${contactCount}件）</button>
+                <button class="btn btn-primary" style="flex:1;background:linear-gradient(135deg,#7C3AED,#2563EB);border:none;" data-action="openFamilySheet">📄 シートを表示</button>
+              </div>
+            </div>
+          </div>
           <div class="section">
             <div class="section-title">データ管理</div>
             <div class="card">
@@ -2033,7 +2119,7 @@
             <div class="card">
               <div class="info-row">
                 <span class="info-label">バージョン</span>
-                <span class="info-value">1.1.0</span>
+                <span class="info-value">1.2.0</span>
               </div>
               <div class="info-row">
                 <span class="info-label">データ保存場所</span>
@@ -2050,7 +2136,8 @@
             </div>
           </div>
         </div>
-        ${state.editPaymentId !== null ? renderPaymentModal() : ''}`;
+        ${state.editPaymentId !== null ? renderPaymentModal() : ''}
+        ${state.showFamilyContacts ? renderFamilyContactsModal() : ''}`;
     }
 
     // 支払い方法編集モーダル
@@ -2145,11 +2232,21 @@
                 <span class="info-label">解約期限</span>
                 <span class="info-value" style="display:flex;align-items:center;gap:6px;">${s.limitDate || '—'} ${limitBadge}</span>
               </div>
+              ${s.loginId ? `
+              <div class="info-row">
+                <span class="info-label">🔑 ログインID</span>
+                <span class="info-value" style="font-size:13px;max-width:180px;overflow:hidden;text-overflow:ellipsis;">${s.loginId}</span>
+              </div>` : ''}
               ${s.notes ? `
               <div style="margin-top:12px;padding:10px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:13px;color:var(--text-sub);line-height:1.5;">
                 <strong>メモ:</strong><br>${s.notes.replace(/\n/g, '<br>')}
               </div>` : ''}
             </div>
+            ${s.cancelSteps ? `
+            <div class="card" style="margin-bottom:16px;border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04);">
+              <div style="font-size:13px;font-weight:700;color:var(--danger);margin-bottom:8px;">📋 解約手順</div>
+              <div style="font-size:13px;color:var(--text);line-height:1.7;white-space:pre-wrap;">${s.cancelSteps.replace(/</g,'&lt;')}</div>
+            </div>` : ''}
             <div style="display:flex;gap:10px;margin-bottom:10px;">
               ${s.cancelUrl ? `<button class="btn btn-outline" style="flex:1;" data-action="openUrl" data-url="${s.cancelUrl}">🔗 解約ページ</button>` : ''}
               <button class="btn btn-outline" style="flex:1;" data-action="closeDetail">閉じる</button>
@@ -2246,8 +2343,17 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="form-label">🔑 ログインID / メールアドレス（任意）</label>
+          <input class="form-input" type="text" value="${get('loginId', '')}" data-action="addForm" data-field="loginId" placeholder="example@email.com">
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">家族への引き継ぎ用に記録できます。パスワードは別途パスワードマネージャーで管理してください。</div>
+        </div>
+        <div class="form-group">
           <label class="form-label">解約ページURL（任意）</label>
           <input class="form-input" type="url" value="${get('cancelUrl', '')}" data-action="addForm" data-field="cancelUrl" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">📋 解約手順メモ（任意）</label>
+          <textarea class="form-input" data-action="addForm" data-field="cancelSteps" rows="3" placeholder="例）1. サービスにログイン&#10;2. アカウント → プラン管理&#10;3. 解約ボタンをクリック" style="font-family:inherit; resize:vertical; min-height:80px;">${get('cancelSteps', '')}</textarea>
         </div>
         <div class="form-group">
           <label class="form-label">タグ（カンマ区切り）</label>
@@ -2324,6 +2430,189 @@
         </div>`;
     }
 
+    // ===== 家族向け引き継ぎシートモーダル =====
+    function renderFamilyModal() {
+      const today = new Date().toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'});
+      const totalMo = totalMonthly();
+      const contacts = state.familyContacts;
+
+      const subsRows = state.subs.map(s => {
+        const pm = state.payments.find(p => p.id === s.paymentId);
+        const c = cs(s.category);
+        return `
+          <div style="border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:${c.bg};display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">${c.icon}</div>
+              <div style="flex:1;">
+                <div style="font-size:15px;font-weight:700;">${s.name}</div>
+                <div style="font-size:12px;color:var(--text-sub);">${s.category} · ${s.cycle} · ${fmt(s.amount, s.amountCurrency)}</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
+              <div style="background:var(--surface-2);border-radius:6px;padding:8px;">
+                <div style="color:var(--text-muted);margin-bottom:2px;">請求日</div>
+                <div style="font-weight:600;">毎月${s.billingDay}日</div>
+              </div>
+              <div style="background:var(--surface-2);border-radius:6px;padding:8px;">
+                <div style="color:var(--text-muted);margin-bottom:2px;">支払い方法</div>
+                <div style="font-weight:600;">${pm ? pm.name : '—'}</div>
+              </div>
+              ${s.loginId ? `
+              <div style="background:rgba(99,102,241,0.08);border-radius:6px;padding:8px;grid-column:span 2;">
+                <div style="color:var(--text-muted);margin-bottom:2px;">🔑 ログインID</div>
+                <div style="font-weight:600;word-break:break-all;">${s.loginId}</div>
+              </div>` : ''}
+              ${s.cancelUrl ? `
+              <div style="background:var(--surface-2);border-radius:6px;padding:8px;grid-column:span 2;">
+                <div style="color:var(--text-muted);margin-bottom:2px;">🔗 解約ページ</div>
+                <div style="font-weight:500;color:var(--primary);word-break:break-all;">${s.cancelUrl}</div>
+              </div>` : ''}
+            </div>
+            ${s.cancelSteps ? `
+            <div style="margin-top:8px;background:rgba(239,68,68,0.06);border-radius:6px;padding:10px;border-left:3px solid var(--danger);">
+              <div style="font-size:11px;font-weight:700;color:var(--danger);margin-bottom:4px;">📋 解約手順</div>
+              <div style="font-size:12px;line-height:1.7;white-space:pre-wrap;color:var(--text);">${s.cancelSteps.replace(/</g,'&lt;')}</div>
+            </div>` : ''}
+            ${s.notes ? `
+            <div style="margin-top:8px;font-size:12px;color:var(--text-sub);line-height:1.5;"><strong>メモ:</strong> ${s.notes}</div>` : ''}
+          </div>`;
+      }).join('');
+
+      const contactsSection = contacts.length > 0 ? `
+        <div style="margin-bottom:20px;">
+          <div style="font-size:14px;font-weight:700;margin-bottom:10px;">👤 緊急連絡先</div>
+          ${contacts.map(c => `
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;background:var(--surface-2);border-radius:var(--radius-sm);margin-bottom:8px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#2563EB);display:flex;align-items:center;justify-content:center;color:white;font-size:14px;font-weight:700;flex-shrink:0;">${c.name.charAt(0)}</div>
+              <div style="flex:1;">
+                <div style="font-size:14px;font-weight:600;">${c.name} <span style="font-size:12px;color:var(--text-sub);font-weight:400;">${c.relation || ''}</span></div>
+                ${c.email ? `<div style="font-size:12px;color:var(--text-sub);">✉️ ${c.email}</div>` : ''}
+                ${c.phone ? `<div style="font-size:12px;color:var(--text-sub);">📞 ${c.phone}</div>` : ''}
+                ${c.note ? `<div style="font-size:12px;color:var(--text-muted);margin-top:2px;">${c.note}</div>` : ''}
+              </div>
+            </div>`).join('')}
+        </div>` : '';
+
+      return `
+        <div class="modal-overlay" data-action="closeFamilyModal">
+          <div class="family-modal" onclick="event.stopPropagation()">
+            <div class="modal-handle"></div>
+            <div class="family-sheet-header">
+              <div style="font-size:11px;opacity:0.8;margin-bottom:4px;">作成日：${today}</div>
+              <div style="font-size:18px;font-weight:700;margin-bottom:4px;">📋 サブスク引き継ぎシート</div>
+              <div style="font-size:12px;opacity:0.85;">このシートには登録済みのサービス一覧・解約方法・ログイン情報が含まれています。</div>
+              <div style="display:flex;gap:12px;margin-top:12px;">
+                <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:8px 14px;text-align:center;flex:1;">
+                  <div style="font-size:10px;opacity:0.8;">登録件数</div>
+                  <div style="font-size:20px;font-weight:700;">${state.subs.length}件</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:8px 14px;text-align:center;flex:1;">
+                  <div style="font-size:10px;opacity:0.8;">月間合計</div>
+                  <div style="font-size:20px;font-weight:700;">${fmt(totalMo)}</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:8px 14px;text-align:center;flex:1;">
+                  <div style="font-size:10px;opacity:0.8;">年間合計</div>
+                  <div style="font-size:20px;font-weight:700;">${fmt(totalMo*12)}</div>
+                </div>
+              </div>
+            </div>
+
+            ${contactsSection}
+
+            <div style="font-size:14px;font-weight:700;margin-bottom:10px;">📦 登録サービス一覧</div>
+            ${state.subs.length === 0
+              ? `<div class="empty-state" style="padding:30px 0;"><div class="empty-icon">📭</div><div class="empty-sub">サブスクが登録されていません</div></div>`
+              : subsRows}
+
+            <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:var(--radius-sm);padding:12px;margin-top:8px;margin-bottom:16px;">
+              <div style="font-size:12px;color:var(--warning);font-weight:700;margin-bottom:4px;">⚠️ 取り扱いご注意</div>
+              <div style="font-size:11px;color:var(--text-sub);line-height:1.6;">このシートにはログイン情報が含まれます。印刷・保管の際は鍵のかかる場所に保管し、不要になったら確実に廃棄してください。</div>
+            </div>
+
+            <div style="display:flex;gap:10px;">
+              <button class="btn btn-outline" style="flex:1;" data-action="printFamilySheet">🖨️ 印刷</button>
+              <button class="btn btn-outline" style="flex:1;" data-action="closeFamilyModal">閉じる</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    // ===== 緊急連絡先管理モーダル =====
+    function renderFamilyContactsModal() {
+      const contacts = state.familyContacts;
+      const editIdx = state.editFamilyIdx;
+      const f = state.editFamilyForm;
+      const base = editIdx !== null && editIdx !== 'new' ? contacts[editIdx] || {} : {};
+      const get = (field, def) => f[field] !== undefined ? f[field] : (base[field] !== undefined ? base[field] : def);
+
+      const editForm = (editIdx !== null) ? `
+        <div style="border:1px solid var(--primary);border-radius:var(--radius);padding:16px;margin-bottom:16px;background:var(--primary-light);">
+          <div style="font-size:14px;font-weight:700;margin-bottom:12px;">${editIdx === 'new' ? '連絡先を追加' : '連絡先を編集'}</div>
+          <div class="form-group">
+            <label class="form-label">氏名 *</label>
+            <input class="form-input" type="text" value="${get('name','')}" data-action="familyForm" data-field="name" placeholder="山田 太郎">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div class="form-group">
+              <label class="form-label">続柄</label>
+              <input class="form-input" type="text" value="${get('relation','')}" data-action="familyForm" data-field="relation" placeholder="配偶者・長男など">
+            </div>
+            <div class="form-group">
+              <label class="form-label">電話番号</label>
+              <input class="form-input" type="tel" value="${get('phone','')}" data-action="familyForm" data-field="phone" placeholder="090-0000-0000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">メールアドレス</label>
+            <input class="form-input" type="email" value="${get('email','')}" data-action="familyForm" data-field="email" placeholder="family@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">メモ</label>
+            <input class="form-input" type="text" value="${get('note','')}" data-action="familyForm" data-field="note" placeholder="主担当など">
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn btn-outline" style="flex:1;" data-action="cancelFamilyEdit">キャンセル</button>
+            <button class="btn btn-primary" style="flex:1;" data-action="saveFamilyContact">保存</button>
+          </div>
+        </div>` : '';
+
+      const contactList = contacts.length === 0 && editIdx === null
+        ? `<div class="empty-state" style="padding:24px 0;"><div class="empty-icon">👤</div><div class="empty-sub">緊急連絡先がまだ登録されていません</div></div>`
+        : contacts.map((c, i) => `
+          <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#2563EB);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;font-weight:700;flex-shrink:0;">${c.name.charAt(0)}</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:14px;font-weight:600;">${c.name} <span style="font-size:12px;color:var(--text-sub);font-weight:400;">${c.relation||''}</span></div>
+              ${c.phone ? `<div style="font-size:12px;color:var(--text-sub);">📞 ${c.phone}</div>` : ''}
+              ${c.email ? `<div style="font-size:12px;color:var(--text-sub);">✉️ ${c.email}</div>` : ''}
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="btn btn-outline btn-sm" data-action="editFamilyContact" data-fidx="${i}">編集</button>
+              <button class="btn btn-danger btn-sm" data-action="deleteFamilyContact" data-fidx="${i}">削除</button>
+            </div>
+          </div>`).join('');
+
+      return `
+        <div class="modal-overlay" data-action="closeFamilyContacts">
+          <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-handle"></div>
+            <div class="modal-title">👤 緊急連絡先の管理</div>
+            <div style="font-size:13px;color:var(--text-sub);margin-bottom:16px;line-height:1.6;">
+              引き継ぎシートに掲載する家族・信頼できる人の連絡先を登録してください。
+            </div>
+            ${editForm}
+            ${contactList}
+            ${editIdx === null ? `
+            <div style="margin-top:12px;">
+              <button class="btn btn-primary btn-block" data-action="addFamilyContact">＋ 連絡先を追加</button>
+            </div>` : ''}
+            <div style="margin-top:12px;">
+              <button class="btn btn-outline btn-block" data-action="closeFamilyContacts">閉じる</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
     // ===== イベント処理（クリック） =====
     // capture:true でstopPropagationの影響を回避
     document.addEventListener('click', (e) => {
@@ -2358,6 +2647,8 @@
       } else if (action === 'editPayForm') {
         state.editPaymentForm[el.dataset.field] = el.value;
         if (el.tagName === 'SELECT') render();
+      } else if (action === 'familyForm') {
+        state.editFamilyForm[el.dataset.field] = el.value;
       } else if (action === 'listSearch') {
         state.listSearch = el.value;
         render();
@@ -2511,6 +2802,55 @@
         // 外部URLを開く
         case 'openUrl':
           if (el.dataset.url) window.open(el.dataset.url, '_blank', 'noopener'); break;
+
+        // 家族引き継ぎシート
+        case 'openFamilySheet':
+          state.showFamilyModal = true; render(); break;
+        case 'closeFamilyModal':
+          state.showFamilyModal = false; render(); break;
+        case 'printFamilySheet':
+          window.print(); break;
+
+        // 緊急連絡先管理
+        case 'openFamilyContacts':
+          state.showFamilyContacts = true; state.editFamilyIdx = null; state.editFamilyForm = {}; render(); break;
+        case 'closeFamilyContacts':
+          state.showFamilyContacts = false; state.editFamilyIdx = null; state.editFamilyForm = {}; render(); break;
+        case 'addFamilyContact':
+          state.editFamilyIdx = 'new'; state.editFamilyForm = {}; render(); break;
+        case 'editFamilyContact':
+          state.editFamilyIdx = Number(el.dataset.fidx); state.editFamilyForm = {}; render(); break;
+        case 'cancelFamilyEdit':
+          state.editFamilyIdx = null; state.editFamilyForm = {}; render(); break;
+        case 'deleteFamilyContact': {
+          const fidx = Number(el.dataset.fidx);
+          if (confirm(`「${state.familyContacts[fidx]?.name}」を削除しますか？`)) {
+            state.familyContacts.splice(fidx, 1);
+            saveToStorage(); render(); showToast('削除しました');
+          }
+          break;
+        }
+        case 'saveFamilyContact': {
+          const f = state.editFamilyForm;
+          const base = state.editFamilyIdx !== 'new' ? state.familyContacts[state.editFamilyIdx] || {} : {};
+          const name = f.name !== undefined ? f.name : (base.name || '');
+          if (!name.trim()) { showToast('氏名を入力してください'); break; }
+          const contact = {
+            name: name.trim(),
+            relation: (f.relation !== undefined ? f.relation : base.relation) || '',
+            phone: (f.phone !== undefined ? f.phone : base.phone) || '',
+            email: (f.email !== undefined ? f.email : base.email) || '',
+            note: (f.note !== undefined ? f.note : base.note) || '',
+          };
+          if (state.editFamilyIdx === 'new') {
+            state.familyContacts.push(contact);
+          } else {
+            state.familyContacts[state.editFamilyIdx] = contact;
+          }
+          state.editFamilyIdx = null; state.editFamilyForm = {};
+          saveToStorage(); render(); showToast('保存しました');
+          break;
+        }
       }
     }
 
@@ -2544,8 +2884,10 @@
 
       const tags = f.tags ? (Array.isArray(f.tags) ? f.tags : f.tags.split(',').map(t => t.trim()).filter(t => t)) : (base.tags || []);
       const notes = f.notes || base.notes || '';
+      const loginId = f.loginId !== undefined ? f.loginId : (base.loginId || '');
+      const cancelSteps = f.cancelSteps !== undefined ? f.cancelSteps : (base.cancelSteps || '');
 
-      const data = { name, amount, amountCurrency, cycle, category, billingDay, paymentId, registrationDate, limitDate, cancelUrl, tags, notes };
+      const data = { name, amount, amountCurrency, cycle, category, billingDay, paymentId, registrationDate, limitDate, cancelUrl, tags, notes, loginId, cancelSteps };
 
       if (isEdit) {
         state.subs = state.subs.map(s => s.id === state.editSubId ? { ...s, ...data } : s);
